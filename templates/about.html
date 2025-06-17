@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}About StoryLens{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-lg">
+            <div class="card-body p-5">
+                <h2 class="text-center mb-4">About StoryLens</h2>
+                
+                <div class="mb-5">
+                    <h4>What is StoryLens?</h4>
+                    <p>StoryLens is an AI-powered application that transforms your photos into creative short stories or poems. Simply upload any photo, and our advanced AI will analyze the image and generate a unique narrative inspired by what it sees. You can then listen to your story with our AI-generated voice narration.</p>
+                </div>
+                
+                <div class="mb-5">
+                    <h4>How It Works</h4>
+                    <p>StoryLens uses state-of-the-art AI models to understand your images and create engaging narratives:</p>
+                    
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5><i class="fas fa-camera me-2 text-primary"></i>Image Understanding</h5>
+                            <p class="mb-0">We use <strong>microsoft/kosmos-2</strong>, a multimodal large language model that can understand both images and text. Kosmos-2 analyzes the content, context, and details of your photo to create a meaningful story.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <h5><i class="fas fa-microphone me-2 text-primary"></i>Voice Narration</h5>
+                            <p class="mb-0">For audio narration, we use <strong>coqui/xtts-v2</strong>, an advanced text-to-speech model that produces natural-sounding voices. This model creates high-quality audio that brings your story to life.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-5">
+                    <h4>Privacy & Data</h4>
+                    <p>We value your privacy. The photos you upload are only used to generate stories and are not permanently stored on our servers. All images are automatically deleted after processing.</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h4>Technical Details</h4>
+                    <p>StoryLens is built with:</p>
+                    <ul>
+                        <li>Python and Flask for the web application</li>
+                        <li>Transformers library for AI model integration</li>
+                        <li>TTS (Text-to-Speech) library for audio generation</li>
+                        <li>Bootstrap for responsive design</li>
+                    </ul>
+                </div>
+                
+                <div class="text-center mt-5">
+                    <a href="{{ url_for('index') }}" class="btn btn-primary">
+                        <i class="fas fa-magic me-2"></i>Create Your Story
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

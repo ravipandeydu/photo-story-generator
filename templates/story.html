@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block title %}Your Generated Story - StoryLens{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card shadow-lg">
+            <div class="card-body p-5">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="text-center mb-4">
+                            <img src="{{ url_for('static', filename=story.image_path) }}" class="img-fluid rounded shadow" alt="Uploaded Image">
+                        </div>
+                        <div class="audio-player mb-4">
+                            <h5 class="mb-3"><i class="fas fa-headphones me-2"></i>Listen to Your Story</h5>
+                            <audio controls class="w-100">
+                                <source src="{{ url_for('static', filename=story.audio_path) }}" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <a href="{{ url_for('index') }}" class="btn btn-outline-primary">
+                                <i class="fas fa-arrow-left me-2"></i>Create Another Story
+                            </a>
+                            <button class="btn btn-primary" id="share-btn">
+                                <i class="fas fa-share-alt me-2"></i>Share Story
+                            </button>
+                            <a href="{{ url_for('static', filename=story.audio_path) }}" download class="btn btn-outline-success">
+                                <i class="fas fa-download me-2"></i>Download Audio
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="story-content">
+                            <h3 class="mb-4">Your Story</h3>
+                            <div class="story-text p-4 bg-light rounded">
+                                {{ story.story|nl2br }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Share Modal -->
+<div class="modal fade" id="shareModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Share Your Story</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Share this story on social media:</p>
+                <div class="d-flex justify-content-center gap-3 mb-4">
+                    <a href="#" class="btn btn-outline-primary" id="facebook-share">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="btn btn-outline-info" id="twitter-share">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="btn btn-outline-success" id="whatsapp-share">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+                <div class="mb-3">
+                    <label for="share-link" class="form-label">Or copy this link:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="share-link" value="{{ request.url }}" readonly>
+                        <button class="btn btn-outline-secondary" type="button" id="copy-link-btn">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Share button functionality
+        const shareBtn = document.getElementById('share-btn');
+        const shareModal = new bootstrap.Modal(document.getElementById('shareModal'));
+        
+        shareBtn.addEventListener('click', function() {
+            shareModal.show();
+        });
+        
+        // Copy link functionality
+        const copyLinkBtn = document.getElementById('copy-link-btn');
+        const shareLinkInput = document.getElementById('share-link');
+        
+        copyLinkBtn.addEventListener('click', function() {
+            shareLinkInput.select();
+            document.execCommand('copy');
+            
+            // Change button text temporarily
+            const originalHTML = copyLinkBtn.innerHTML;
+            copyLinkBtn.innerHTML = '<i class="fas fa-check"></i>';
+            setTimeout(function() {
+                copyLinkBtn.innerHTML = originalHTML;
+            }, 2000);
+        });
+        
+        // Social media share links
+        const facebookShare = document.getElementById('facebook-share');
+        const twitterShare = document.getElementById('twitter-share');
+        const whatsappShare = document.getElementById('whatsapp-share');
+        
+        const pageUrl = encodeURIComponent(window.location.href);
+        const pageTitle = encodeURIComponent(document.title);
+        
+        facebookShare.href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
+        twitterShare.href = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
+        whatsappShare.href = `https://api.whatsapp.com/send?text=${pageTitle} ${pageUrl}`;
+    });
+</script>
+{% endblock %}

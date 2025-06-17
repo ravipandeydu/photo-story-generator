@@ -1,0 +1,24 @@
+# Web Framework
+flask==2.3.3
+flask-wtf==1.1.1
+Werkzeug==2.3.7
+
+# Image Processing
+pillow==10.0.0
+
+# AI Models
+transformers==4.33.2
+torch==2.0.1
+torchvision==0.15.2
+timm==0.9.5
+
+# Text-to-Speech
+TTS==0.21.1
+
+# Utilities
+python-dotenv==1.0.0
+numpy==1.25.2
+tqdm==4.66.1
+
+# For deployment
+gunicorn==21.2.0

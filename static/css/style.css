@@ -1,0 +1,101 @@
+/* StoryLens - Main Stylesheet */
+
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+/* Header & Navigation */
+.navbar-brand {
+    font-weight: 600;
+    font-size: 1.4rem;
+}
+
+/* Card Styles */
+.card {
+    border: none;
+    border-radius: 12px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Upload Area */
+.upload-area {
+    border: 2px dashed #dee2e6;
+    border-radius: 10px;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.upload-area.highlight {
+    border-color: #007bff;
+    background-color: rgba(0, 123, 255, 0.05);
+}
+
+#preview-container {
+    position: relative;
+}
+
+/* Story Display */
+.story-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    white-space: pre-line;
+    border-left: 4px solid #007bff;
+}
+
+/* Audio Player */
+audio {
+    border-radius: 30px;
+    height: 40px;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 8px;
+    padding: 0.5rem 1.5rem;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+/* Footer */
+footer {
+    border-top: 1px solid #e9ecef;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .story-content {
+        margin-top: 2rem;
+    }
+}
+
+/* Custom Filter for nl2br in Jinja */
+.nl2br {
+    white-space: pre-line;
+}
